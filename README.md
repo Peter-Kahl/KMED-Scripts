@@ -11,7 +11,7 @@ The scripts reproduce the simulations documented in the paper:
 **_Epistemic Clientelism in Intimate Relationships: The Kahl Model of Epistemic Dissonance (KMED) and the Foundations of Epistemic Psychology_**
 (Lex et Ratio Ltd, London, 2025).
 
-## 🧪 Implemented Simulations
+## Implemented Simulations
 
 Each simulation corresponds to the versions published in Appendix A of the paper:
 
@@ -26,9 +26,7 @@ All simulations share a consistent coding style and produce three primary plots:
 - **Dissonance Tolerance (DT)**
 - **Dependence (D)**
 
----
-
-## 🔧 Requirements
+## Requirements
 
 - Python 3.9+
 - `numpy`
@@ -40,7 +38,7 @@ Install dependencies via:
 pip install numpy matplotlib
 ```
 
-## 🚀 Usage
+## Usage
 
 Run a simulation directly from the simulations/ folder. For example:
 
