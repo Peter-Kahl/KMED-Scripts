@@ -2,34 +2,48 @@
 # Simulation 4 — Gaslighting (oscillating recognition and suppression) — KMED
 # (Single agent; alternating short blocks of fiduciary recognition and clientelist withdrawal)
 #
-# First published in London by Lex et Ratio Ltd, 25 September 2025.
+# Author: Peter Kahl
+# First published: London, 25 September 2025
+# Revision: Rev A (25 September 2025)
 #
-# © 2025 Lex et Ratio Ltd.
+# Repository: https://github.com/Peter-Kahl/KMED-Scripts
+# Script URL: https://github.com/Peter-Kahl/KMED-Scripts/blob/main/sim4_gaslighting.py
 #
-# This code is released under the MIT Licence:
+# © 2025 Peter Kahl / Lex et Ratio Ltd.
+#
+# License: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
+# of this software and associated documentation files (the “Software”), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# The Software is provided “AS IS”, without warranty of any kind, express or
+# implied, including but not limited to the warranties of merchantability,
+# fitness for a particular purpose and noninfringement. In no event shall the
+# authors or copyright holders be liable for any claim, damages or other
+# liability, whether in an action of contract, tort or otherwise, arising from,
+# out of or in connection with the Software or the use or other dealings in
+# the Software.
+#
+# Full license text: https://opensource.org/licenses/MIT
 
+import os
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
 # --- RNG (fixed for reproducibility) ---
 rng = np.random.default_rng(42)
+
+# repo root is one level up from this script
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- Asymptotic one-step updater (bounded in [0,1]) ---
 def step_asymptotic(x, k, theta, noise_std):
@@ -37,7 +51,7 @@ def step_asymptotic(x, k, theta, noise_std):
     x_next = x + k * (theta - x) + eps
     return float(np.clip(x_next, 0.0, 1.0))
 
-# --- Parameter presets for regimes (match Sim 1 style) ---
+# --- Parameter presets for regimes ---
 FIDUCIARY = dict(
     EA_theta=0.74, EA_k=0.05,  # autonomy grows to high plateau
     DT_theta=0.80, DT_k=0.06,  # tolerance consolidates under scaffolds
@@ -115,12 +129,6 @@ EA, DT, D, phases = simulate_gaslighting(
     noise_std=0.004
 )
 
-# --- Quick sanity prints ---
-print("First 6 steps (EA, DT, D):")
-print("EA:", np.round(EA[:6], 4))
-print("DT:", np.round(DT[:6], 4))
-print("D :", np.round(D[:6], 4))
-
 # --- Helper: shade phases on an axis ---
 def shade_phases(ax, phases, ymax=1.0, fid_color=(0.6,0.9,0.6,0.25), cli_color=(0.9,0.6,0.6,0.25)):
     for regime, i0, i1 in phases:
@@ -137,7 +145,7 @@ ax.set_title("EA under Oscillating Recognition/Withdrawal (Gaslighting) — KMED
 ax.set_ylim(0, 1)
 ax.legend()
 fig.tight_layout()
-fig.savefig("A3_sim4_EA.png", dpi=200)
+fig.savefig(OUTPUT_DIR / "sim4_EA.png", dpi=200)
 plt.show()
 
 # --- Plot 2: Dissonance Tolerance (DT) ---
@@ -150,7 +158,7 @@ ax.set_title("DT under Oscillating Recognition/Withdrawal (Gaslighting) — KMED
 ax.set_ylim(0, 1)
 ax.legend()
 fig.tight_layout()
-fig.savefig("A3_sim4_DT.png", dpi=200)
+fig.savefig(OUTPUT_DIR / "sim4_DT.png", dpi=200)
 plt.show()
 
 # --- Plot 3: Dependence (D) ---
@@ -163,5 +171,5 @@ ax.set_title("D under Oscillating Recognition/Withdrawal (Gaslighting) — KMED"
 ax.set_ylim(0, 1)
 ax.legend()
 fig.tight_layout()
-fig.savefig("A3_sim4_D.png", dpi=200)
+fig.savefig(OUTPUT_DIR / "sim4_D.png", dpi=200)
 plt.show()

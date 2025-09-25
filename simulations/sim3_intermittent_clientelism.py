@@ -1,38 +1,47 @@
 # The Kahl Model of Epistemic Dissonance (KMED)
 # Simulation 3: Intermittent clientelism vs stable fiduciary — KMED (asymptotic)
-# Produces:
-#  - Fig A.3.3.1  EA trajectories for p ∈ {0.0, 0.1, 0.2, 0.3, 0.5}
-#  - Fig A.3.3.2  DT trajectories (same p)
-#  - Fig A.3.3.3  D  trajectories (same p)
-#  - Fig A.3.3.4  Equilibrium EA/DT/D vs p (last-100-step mean ± 95% CI)
 #
-# First published in London by Lex et Ratio Ltd, 25 September 2025.
+# Author: Peter Kahl
+# First published: London, 25 September 2025
+# Revision: Rev A (25 September 2025)
 #
-# © 2025 Lex et Ratio Ltd.
+# Repository: https://github.com/Peter-Kahl/KMED-Scripts
+# Script URL: https://github.com/Peter-Kahl/KMED-Scripts/blob/main/sim3_intermittent_clientelism.py
 #
-# This code is released under the MIT Licence:
+# © 2025 Peter Kahl / Lex et Ratio Ltd.
+#
+# License: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
+# of this software and associated documentation files (the “Software”), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# The Software is provided “AS IS”, without warranty of any kind, express or
+# implied, including but not limited to the warranties of merchantability,
+# fitness for a particular purpose and noninfringement. In no event shall the
+# authors or copyright holders be liable for any claim, damages or other
+# liability, whether in an action of contract, tort or otherwise, arising from,
+# out of or in connection with the Software or the use or other dealings in
+# the Software.
+#
+# Full license text: https://opensource.org/licenses/MIT
 
+import os
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
 rng = np.random.default_rng(42)
+
+# repo root is one level up from this script
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------- KMED asymptotic step ----------
 def step_asymptotic(x, k, theta, noise_std):
@@ -116,15 +125,15 @@ def plot_trajectories(series_dict, ylabel, title, fname):
 
 plot_trajectories(EA_series, "Epistemic Autonomy (EA)",
                   "EA under Intermittent Clientelism (variable share) — KMED",
-                  "A3_sim3_EA_trajectories.png")
+                  OUTPUT_DIR / "sim3_EA_trajectories.png")
 
 plot_trajectories(DT_series, "Dissonance Tolerance (DT)",
                   "DT under Intermittent Clientelism (variable share) — KMED",
-                  "A3_sim3_DT_trajectories.png")
+                  OUTPUT_DIR / "sim3_DT_trajectories.png")
 
 plot_trajectories(D_series, "Dependence (D)",
                   "D under Intermittent Clientelism (variable share) — KMED",
-                  "A3_sim3_D_trajectories.png")
+                  OUTPUT_DIR / "sim3_D_trajectories.png")
 
 # ---------- Equilibria vs p (last-100-step mean ± 95% CI) ----------
 def tail_stats(y, tail=100):
@@ -157,5 +166,5 @@ plt.ylabel("Equilibrium level (last-100-step mean)")
 plt.title("Equilibrium EA / DT / D vs Clientelist Share — KMED")
 plt.legend()
 plt.tight_layout()
-plt.savefig("A3_sim3_equilibria_vs_p.png", dpi=200)
+plt.savefig(OUTPUT_DIR / "sim3_equilibria_vs_p.png", dpi=200)
 plt.show()

@@ -1,35 +1,49 @@
 # The Kahl Model of Epistemic Dissonance (KMED)
-# Simulation 5 — Dissonance Training (therapeutic scaffolding) — KMED
+# Simulation 5 — Dissonance Training (Therapeutic Scaffolding)
 #
-# First published in London by Lex et Ratio Ltd, 25 September 2025.
+# Author: Peter Kahl
+# First published: London, 25 September 2025
+# Revision: Rev A (25 September 2025)
 #
-# © 2025 Lex et Ratio Ltd.
+# Repository: https://github.com/Peter-Kahl/KMED-Scripts
+# Script URL: https://github.com/Peter-Kahl/KMED-Scripts/blob/main/sim5_dissonance_training.py
 #
-# This code is released under the MIT Licence:
+# © 2025 Peter Kahl / Lex et Ratio Ltd.
+#
+# License: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
+# of this software and associated documentation files (the “Software”), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# The Software is provided “AS IS”, without warranty of any kind, express or
+# implied, including but not limited to the warranties of merchantability,
+# fitness for a particular purpose and noninfringement. In no event shall the
+# authors or copyright holders be liable for any claim, damages or other
+# liability, whether in an action of contract, tort or otherwise, arising from,
+# out of or in connection with the Software or the use or other dealings in
+# the Software.
+#
+# Full license text: https://opensource.org/licenses/MIT
 
+import os
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
 rng = np.random.default_rng(42)
 
-# ----- Core updater (same primitive as other sims) -----
+# repo root is one level up from this script
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# ----- Core updater -----
 def step_asymptotic(x, k, theta, noise_std):
     eps = rng.normal(0.0, noise_std) if noise_std > 0 else 0.0
     x_next = x + k*(theta - x) + eps
@@ -127,7 +141,7 @@ plt.ylim(0, 1.0)
 plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Epistemic Autonomy (EA)")
 plt.title("EA under Dissonance Training (therapeutic scaffolding) — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim5_EA.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim5_EA.png", dpi=200); plt.show()
 
 # (2) Dissonance Tolerance
 plt.figure(figsize=(10, 5.8))
@@ -138,7 +152,7 @@ plt.ylim(0, 1.0)
 plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Dissonance Tolerance (DT)")
 plt.title("DT under Dissonance Training (therapeutic scaffolding) — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim5_DT.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim5_DT.png", dpi=200); plt.show()
 
 # (3) Dependence
 plt.figure(figsize=(10, 5.8))
@@ -149,7 +163,7 @@ plt.ylim(0, 1.0)
 plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Dependence (D)")
 plt.title("D under Dissonance Training (therapeutic scaffolding) — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim5_D.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim5_D.png", dpi=200); plt.show()
 
 # Quick sanity: last-100-step means (therapeutic “equilibria”)
 print("Final (mean of last 100 steps):",

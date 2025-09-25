@@ -2,29 +2,38 @@
 # Simulation 1: Fiduciary Scaffold vs Clientelist Suppression — KMED
 # (Single agent, two regimes)
 #
-# First published in London by Lex et Ratio Ltd, 25 September 2025.
+# Author: Peter Kahl
+# First published: London, 25 September 2025
+# Revision: Rev A (25 September 2025)
 #
-# © 2025 Lex et Ratio Ltd.
+# Repository: https://github.com/Peter-Kahl/KMED-Scripts
+# Script URL: https://github.com/Peter-Kahl/KMED-Scripts/blob/main/sim1_fiduciary_vs_clientelist.py
 #
-# This code is released under the MIT Licence:
+# © 2025 Peter Kahl / Lex et Ratio Ltd.
+#
+# License: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
+# of this software and associated documentation files (the “Software”), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# The Software is provided “AS IS”, without warranty of any kind, express or
+# implied, including but not limited to the warranties of merchantability,
+# fitness for a particular purpose and noninfringement. In no event shall the
+# authors or copyright holders be liable for any claim, damages or other
+# liability, whether in an action of contract, tort or otherwise, arising from,
+# out of or in connection with the Software or the use or other dealings in
+# the Software.
+#
+# Full license text: https://opensource.org/licenses/MIT
 
+import os
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -78,24 +87,29 @@ EA_c, DT_c, D_c = simulate_asym(
 print("Fiduciary DT (first 6):", np.round(DT_f[:6], 4))   # strictly increasing
 print("Clientelist DT (first 6):", np.round(DT_c[:6], 4)) # strictly decreasing
 
+# repo root is one level up from this script
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
 # --- Plots ---
 plt.figure(figsize=(10,5.6))
 plt.plot(t, EA_f, '-',  label="EA (fiduciary)")
 plt.plot(t, EA_c, '--', label="EA (clientelist)")
 plt.xlabel("Time (micro-dissonance events)"); plt.ylabel("Epistemic Autonomy (EA)")
 plt.title("EA under Fiduciary Scaffold vs Clientelist Suppression — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim1_tuned_EA.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim1_EA.png", dpi=200); plt.show()
 
 plt.figure(figsize=(10,5.6))
 plt.plot(t, DT_f, '-',  label="DT (fiduciary)")
 plt.plot(t, DT_c, '--', label="DT (clientelist)")
 plt.xlabel("Time (micro-dissonance events)"); plt.ylabel("Dissonance Tolerance (DT)")
 plt.title("DT under Fiduciary Scaffold vs Clientelist Suppression — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim1_tuned_DT.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim1_DT.png", dpi=200); plt.show()
 
 plt.figure(figsize=(10,5.6))
 plt.plot(t, D_f, '-',  label="D (fiduciary)")
 plt.plot(t, D_c, '--', label="D (clientelist)")
 plt.xlabel("Time (micro-dissonance events)"); plt.ylabel("Dependence (D)")
 plt.title("D under Fiduciary Scaffold vs Clientelist Suppression — KMED")
-plt.legend(); plt.tight_layout(); plt.savefig("A3_sim1_tuned_D.png", dpi=200); plt.show()
+plt.legend(); plt.tight_layout(); plt.savefig(OUTPUT_DIR / "sim1_D.png", dpi=200); plt.show()

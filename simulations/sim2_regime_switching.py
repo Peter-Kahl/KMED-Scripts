@@ -2,29 +2,38 @@
 # Simulation 2: Regime Switching (Rupture → Repair) — KMED
 # (Single agent: clientelist → fiduciary)
 #
-# First published in London by Lex et Ratio Ltd, 25 September 2025.
+# Author: Peter Kahl
+# First published: London, 25 September 2025
+# Revision: Rev A (25 September 2025)
 #
-# © 2025 Lex et Ratio Ltd.
+# Repository: https://github.com/Peter-Kahl/KMED-Scripts
+# Script URL: https://github.com/Peter-Kahl/KMED-Scripts/blob/main/sim2_regime_switching.py
 #
-# This code is released under the MIT Licence:
+# © 2025 Peter Kahl / Lex et Ratio Ltd.
+#
+# License: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
+# of this software and associated documentation files (the “Software”), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# The Software is provided “AS IS”, without warranty of any kind, express or
+# implied, including but not limited to the warranties of merchantability,
+# fitness for a particular purpose and noninfringement. In no event shall the
+# authors or copyright holders be liable for any claim, damages or other
+# liability, whether in an action of contract, tort or otherwise, arising from,
+# out of or in connection with the Software or the use or other dealings in
+# the Software.
+#
+# Full license text: https://opensource.org/licenses/MIT
 
+import os
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -93,23 +102,17 @@ EA_s, DT_s, D_s = simulate_asym_schedule(
     noise_std=0.004
 )
 
-# Quick sanity prints: first/around switch/last few steps
-print("EA (first 6):", np.round(EA_s[:6], 4))
-print("EA (around switch):", np.round(EA_s[Tswitch-2:Tswitch+4], 4))
-print("EA (last 6):", np.round(EA_s[-6:], 4))
-print("DT (first 6):", np.round(DT_s[:6], 4))
-print("DT (around switch):", np.round(DT_s[Tswitch-2:Tswitch+4], 4))
-print("DT (last 6):", np.round(DT_s[-6:], 4))
-print("D  (first 6):", np.round(D_s[:6], 4))
-print("D  (around switch):", np.round(D_s[Tswitch-2:Tswitch+4], 4))
-print("D  (last 6):", np.round(D_s[-6:], 4))
-
 # ----------------------------
 # Plots (mark the switch point)
 # ----------------------------
 def mark_switch(ax, Ts):
     ax.axvline(Ts, linestyle=":", linewidth=1.5)
     ax.text(Ts+2, 0.04, "switch\n(rupture → repair)", fontsize=9, va="bottom")
+
+# repo root is one level up from this script
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # (1) Epistemic Autonomy
 plt.figure(figsize=(10, 5.6))
@@ -119,7 +122,7 @@ plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Epistemic Autonomy (EA)")
 plt.title("EA under Clientelist → Fiduciary Regime Switching — KMED")
 plt.ylim(0, 1); plt.legend(); plt.tight_layout()
-plt.savefig("A3_sim2_EA.png", dpi=200); plt.show()
+plt.savefig(OUTPUT_DIR / "sim2_EA.png", dpi=200); plt.show()
 
 # (2) Dissonance Tolerance
 plt.figure(figsize=(10, 5.6))
@@ -129,7 +132,7 @@ plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Dissonance Tolerance (DT)")
 plt.title("DT under Clientelist → Fiduciary Regime Switching — KMED")
 plt.ylim(0, 1); plt.legend(); plt.tight_layout()
-plt.savefig("A3_sim2_DT.png", dpi=200); plt.show()
+plt.savefig(OUTPUT_DIR / "sim2_DT.png", dpi=200); plt.show()
 
 # (3) Dependence
 plt.figure(figsize=(10, 5.6))
@@ -139,4 +142,4 @@ plt.xlabel("Time (micro-dissonance events)")
 plt.ylabel("Dependence (D)")
 plt.title("D under Clientelist → Fiduciary Regime Switching — KMED")
 plt.ylim(0, 1); plt.legend(); plt.tight_layout()
-plt.savefig("A3_sim2_D.png", dpi=200); plt.show()
+plt.savefig(OUTPUT_DIR / "sim2_D.png", dpi=200); plt.show()
