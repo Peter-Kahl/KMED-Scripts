@@ -2,8 +2,6 @@
 
 # KMED Scripts
 
-### The Kahl Model of Epistemic Dissonance (KMED)
-
 This repository contains the official Python reference implementations of the **Kahl Model of Epistemic Dissonance (KMED)**.
 KMED is a mathematical and computational framework for modelling epistemic clientelism, dissonance, and resilience in intimate and institutional contexts.
 
