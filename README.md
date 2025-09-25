@@ -46,6 +46,7 @@ python simulations/sim1_fiduciary_vs_clientelist.py
 Plots will be saved into the corresponding subdirectory of outputs/.
 
 ## License
+
 - Code is released under the MIT License (see LICENSE).
 - Accompanying paper and documentation are released under Creative Commons BY-NC-ND 4.0.
 
@@ -57,8 +58,3 @@ You may freely use, adapt, and extend the code for research and educational purp
 If you use these scripts in academic work, please cite:
 
 Kahl, P. (2025). Epistemic clientelism in intimate relationships: The Kahl Model of Epistemic Dissonance (KMED) and the Foundations of Epistemic Psychology (2nd ed.). Lex et Ratio Ltd. GitHub: https://github.com/Peter-Kahl/Epistemic-Clientelism-in-Intimate-Relationships DOI: http://dx.doi.org/10.13140/RG.2.2.22662.43849
-
-## Links
-
-- Full paper (Lex et Ratio Ltd): [link forthcoming]
-- GitHub project: KMED-Scripts
