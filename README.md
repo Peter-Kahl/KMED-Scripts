@@ -8,8 +8,7 @@ This repository contains the official Python reference implementations of the **
 KMED is a mathematical and computational framework for modelling epistemic clientelism, dissonance, and resilience in intimate and institutional contexts.
 
 The scripts reproduce the simulations documented in the paper:
-**_Epistemic Clientelism in Intimate Relationships: The Kahl Model of Epistemic Dissonance (KMED) and the Foundations of Epistemic Psychology_**
-(Lex et Ratio Ltd, London, 2025).
+[**_Epistemic Clientelism in Intimate Relationships: The Kahl Model of Epistemic Dissonance (KMED) and the Foundations of Epistemic Psychology_**](https://github.com/Peter-Kahl/Epistemic-Clientelism-in-Intimate-Relationships) (Lex et Ratio Ltd, London, 2025).
 
 ## Implemented Simulations
 
