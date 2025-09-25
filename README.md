@@ -1,5 +1,3 @@
-#### Peter-Kahl >
-
 # KMED Scripts
 
 This repository contains the official Python reference implementations of the **Kahl Model of Epistemic Dissonance (KMED)**.
