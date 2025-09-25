@@ -35,6 +35,14 @@ Install dependencies via:
 pip install numpy matplotlib
 ```
 
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Peter-Kahl/KMED-Scripts.git
+```
+
 ## Usage
 
 Run a simulation directly from the simulations/ folder. For example:
