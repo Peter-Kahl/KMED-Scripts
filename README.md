@@ -28,11 +28,12 @@ All simulations share a consistent coding style and produce three primary plots:
 - Python 3.9+
 - `numpy`
 - `matplotlib`
+- `os`
 
 Install dependencies via:
 
 ```bash
-pip install numpy matplotlib
+pip install numpy matplotlib os
 ```
 
 ## Installation
@@ -51,7 +52,7 @@ Run a simulation directly from the simulations/ folder. For example:
 python simulations/sim1_fiduciary_vs_clientelist.py
 ```
 
-Plots will be saved into the corresponding subdirectory of outputs/.
+Plots will be saved into the directory outputs/.
 
 ## License
 
