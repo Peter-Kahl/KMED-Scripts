@@ -12,11 +12,11 @@ The scripts reproduce the simulations documented in the paper:
 
 Each simulation corresponds to the versions published in Appendix A of the paper:
 
-1. [**Simulation 1**](/Peter-Kahl/simulations/sim1_fiduciary_vs_clientelist.py) — Fiduciary scaffold vs clientelist suppression (single agent)
-2. [**Simulation 2**](/Peter-Kahl/simulations/sim2_regime_switching.py) — Regime switching (rupture → repair)
-3. [**Simulation 3**](/Peter-Kahl/simulations/sim3_intermittent_clientelism.py) — Intermittent clientelism vs stable fiduciary
-4. [**Simulation 4**](/Peter-Kahl/simulations/sim4_gaslighting.py) — Gaslighting (oscillating recognition and suppression)
-5. [**Simulation 5**](/Peter-Kahl/simulations/sim5_dissonance_training.py) — Dissonance Training (therapeutic scaffolding)
+1. [**Simulation 1**](https://github.com/Peter-Kahl/simulations/sim1_fiduciary_vs_clientelist.py) — Fiduciary scaffold vs clientelist suppression (single agent)
+2. [**Simulation 2**](https://github.com/Peter-Kahl/simulations/sim2_regime_switching.py) — Regime switching (rupture → repair)
+3. [**Simulation 3**](https://github.com/Peter-Kahl/simulations/sim3_intermittent_clientelism.py) — Intermittent clientelism vs stable fiduciary
+4. [**Simulation 4**](https://github.com/Peter-Kahl/simulations/sim4_gaslighting.py) — Gaslighting (oscillating recognition and suppression)
+5. [**Simulation 5**](https://github.com/Peter-Kahl/simulations/sim5_dissonance_training.py) — Dissonance Training (therapeutic scaffolding)
 
 All simulations share a consistent coding style and produce three primary plots:
 - **Epistemic Autonomy (EA)**
